@@ -18,17 +18,17 @@ namespace LoggingKata
             var cells = line.Split(',');//.Split returns an array 
             if (cells.Length < 3) { logger.LogError("Well, the string was the wrong size after being .Split"); return null; }
             
-            var name = cells[2];
             var lon = double.Parse(cells[0]);
             var lat = double.Parse(cells[1]);
+            var name = cells[2];
             try
             {
-                if (lat > Point.MaxLat || lat < -Point.MaxLat) { logger.LogError("Latitude out of range"); return null; }
-                if (lon > Point.MaxLon || lon < -Point.MaxLon) { logger.LogError("Longitude out of range"); return null;  }
+                if (lat > Point.MaxLat || lat < -Point.MaxLat) { logger.LogWarning("Latitude out of range"); return null; }
+                if (lon > Point.MaxLon || lon < -Point.MaxLon) { logger.LogWarning("Longitude out of range"); return null;  }
             }
             catch (Exception e)
             {
-                logger.LogError("Something messed up with the parsing process, man");
+                logger.LogError("Something messed up with the parsing process, man. You got crazy numbers");
                 Console.WriteLine(e);
                 return null;
             }

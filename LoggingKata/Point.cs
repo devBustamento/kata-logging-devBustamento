@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace LoggingKata
+﻿namespace LoggingKata
 {
     public struct Point //Point because of a point on earth
     {
