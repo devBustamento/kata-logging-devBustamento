@@ -6,6 +6,7 @@ namespace LoggingKata.Test
     {
         [Theory]
         [InlineData("-86.889051, 33.556383, Taco Bell Birmingham")]
+        [InlineData("-86.889051, 33.556383")]
         public void ShouldParse(string line)
         {
             //Arrange
