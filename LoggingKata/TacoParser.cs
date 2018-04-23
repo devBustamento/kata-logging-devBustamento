@@ -16,29 +16,32 @@ namespace LoggingKata
             if (string.IsNullOrEmpty(line)) { logger.LogFatal("Yo, this line is empty"); return null; }
 
             var cells = line.Split(',');//.Split returns an array 
-            if (cells.Length < 3) { logger.LogError("Well, the string was the wrong size after being .Split"); return null; }
-            
-            double lon;
-            double lat;
-            var name = cells[2];
+            if (cells.Length < 2) { logger.LogError("Well, the string was the wrong size after being .Split"); return null; }
+
             try
             {
-                lon = double.Parse(cells[0]);
-                lat = double.Parse(cells[1]);
-                if (Math.Abs(lat) > Point.MaxLat || Math.Abs(lon) > Point.MaxLon) { logger.LogWarning("Latitude/Longitude out of range"); return null; }
+                var lon = double.Parse(cells[0]);
+                double lat = double.Parse(cells[1]);
+                if (Math.Abs(lat) > Point.MaxLat || Math.Abs(lon) > Point.MaxLon)
+                {
+                    logger.LogWarning("Latitude/Longitude out of range");
+                    return null;
+                }
+
+                var name = cells.Length > 2 ? cells[2] : null;
+                return new TacoBell
+                {//This TacoBells location and name is .....
+                    Location = new Point { Longitude = lon, Latitude = lat },
+                    Name = name
+                };
             }
             catch (Exception e)
             {
                 logger.LogError("Something messed up with the parsing process, man. You got crazy numbers");
-                
+                Console.WriteLine(e);
+                Console.ReadKey();
                 return null;
             }
-
-            return new TacoBell
-            {//This TacoBells location and name is .....
-                Location = new Point {Longitude = lon, Latitude = lat},
-                Name = name
-            };//why does this need a semi-colon?? 
         }
     }
 }
