@@ -11,9 +11,9 @@ namespace LoggingKata
         
         public ITrackable Parse(string line)
         {
-            logger.LogInfo("Begin parsing");
+            logger.LogInfo("IM WORKING GIVE ME A MINUTE");
 
-            if (string.IsNullOrEmpty(line)) { logger.LogError("Yo, this line is empty"); return null; }
+            if (string.IsNullOrEmpty(line)) { logger.LogFatal("Yo, this line is empty"); return null; }
 
             var cells = line.Split(',');//.Split returns an array 
             if (cells.Length < 3) { logger.LogError("Well, the string was the wrong size after being .Split"); return null; }
