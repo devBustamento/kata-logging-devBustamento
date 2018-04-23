@@ -39,7 +39,7 @@ namespace LoggingKata
                 {
                     var destination = new GeoCoordinate
                     {
-                         Latitude = LocB.Location.Latitude,
+                        Latitude = LocB.Location.Latitude,
                         Longitude = LocB.Location.Longitude
                     };
 
@@ -53,7 +53,7 @@ namespace LoggingKata
                 }
             }
 
-            Console.WriteLine($"The two tacobells that are farthest apart are: {a.Name} and {b.Name}");
+            Console.WriteLine($"The two tacobells that are farthest apart are:\n {a.Name} and {b.Name}");
             Console.WriteLine($"These two locations are {distance} meters apart");
             Console.ReadLine();
         }
