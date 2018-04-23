@@ -2,9 +2,6 @@
 
 namespace LoggingKata
 {
-    /// <summary>
-    /// Parses a POI file to locate all the TacoBells
-    /// </summary>
     public class TacoParser
     {
         readonly ILog logger = new TacoLogger();
@@ -21,7 +18,7 @@ namespace LoggingKata
             try
             {
                 var lon = double.Parse(cells[0]);
-                double lat = double.Parse(cells[1]);
+                var lat = double.Parse(cells[1]);
                 if (Math.Abs(lat) > Point.MaxLat || Math.Abs(lon) > Point.MaxLon)
                 {
                     logger.LogWarning("Latitude/Longitude out of range");

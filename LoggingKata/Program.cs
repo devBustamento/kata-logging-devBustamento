@@ -7,17 +7,17 @@ namespace LoggingKata
 {
     class Program
     {
-        static readonly ILog logger = new TacoLogger();
+        static readonly ILog Logger = new TacoLogger();
 
-        const string csvPath = "TacoBell-US-AL.csv";
+        const string CsvPath = "TacoBell-US-AL.csv";
 
         static void Main(string[] args)
         {
-            logger.LogInfo("Log initialized");
+            Logger.LogInfo("Log initialized");
 
-            var lines = File.ReadAllLines(csvPath);
+            var lines = File.ReadAllLines(CsvPath);
 
-            logger.LogInfo($"Lines: {lines[0]}");
+            Logger.LogInfo($"Lines: {lines[0]}");
 
             var parser = new TacoParser();
 
@@ -27,34 +27,24 @@ namespace LoggingKata
             ITrackable b = null;
             double distance = 0;
 
-            foreach (var LocA in locations)
+            foreach (var locA in locations)
             {
-                var origin = new GeoCoordinate
+                var origin = new GeoCoordinate( locA.Location.Latitude, locA.Location.Longitude );
+
+                foreach (var locB in locations)
                 {
-                    Latitude = LocA.Location.Latitude,
-                    Longitude = LocA.Location.Longitude
-                };
-                
-                foreach (var LocB in locations)
-                {
-                    var destination = new GeoCoordinate
-                    {
-                        Latitude = LocB.Location.Latitude,
-                        Longitude = LocB.Location.Longitude
-                    };
+                    var destination = new GeoCoordinate( locB.Location.Latitude, locB.Location.Longitude );
 
                     double newDistance = origin.GetDistanceTo(destination);
-                    if (newDistance > distance)
-                    {
-                        a = LocA;
-                        b = LocB;
-                        distance = newDistance;
-                    }
+                    if (!(newDistance > distance)) { continue; }
+                    a = locA;
+                    b = locB;
+                    distance = newDistance;
                 }
             }
 
-            Console.WriteLine($"The two tacobells that are farthest apart are:\n {a.Name} and {b.Name}");
-            Console.WriteLine($"These two locations are {distance} meters apart");
+            Console.WriteLine($"The two tacobells that are farthest apart are:\n\t{a?.Name} and \n\t{b?.Name}");
+            Console.WriteLine($"These two locations are {distance/3.28} feet apart");
             Console.ReadLine();
         }
     }
