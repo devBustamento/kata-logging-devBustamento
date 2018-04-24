@@ -10,10 +10,18 @@ namespace LoggingKata
         {
             logger.LogInfo("IM WORKING GIVE ME A MINUTE");
 
-            if (string.IsNullOrEmpty(line)) { logger.LogFatal("Yo, this line is empty"); return null; }
+            if (string.IsNullOrEmpty(line))
+            {
+                logger.LogFatal("Yo, this line is empty");
+                return null;
+            }
 
             var cells = line.Split(',');//.Split returns an array 
-            if (cells.Length < 2) { logger.LogError("Well, the string was the wrong size after being .Split"); return null; }
+            if (cells.Length < 2)
+            {
+                logger.LogError("Well, the string was the wrong size after being .Split");
+                return null;
+            }
 
             try
             {

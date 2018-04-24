@@ -14,8 +14,8 @@ namespace LoggingKata.Test
             //Act
             var result = parser.Parse(line);
             //Assert
-            Assert.NotNull(result.Name);
-            Assert.NotNull(result.Location);
+            Assert.NotNull(result);
+            Assert.NotNull(result);
         }
 
         [Theory]
@@ -31,11 +31,10 @@ namespace LoggingKata.Test
         {
             //Arrange 
             var parser = new TacoParser();
-            ITrackable expected = null;
             //Act
             var actual = parser.Parse(line);
             //Assert
-            Assert.Equal(actual, expected);
+            Assert.Null(actual);
         }
     }
 }
