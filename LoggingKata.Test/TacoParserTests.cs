@@ -15,7 +15,6 @@ namespace LoggingKata.Test
             var result = parser.Parse(line);
             //Assert
             Assert.NotNull(result);
-            Assert.NotNull(result);
         }
 
         [Theory]
